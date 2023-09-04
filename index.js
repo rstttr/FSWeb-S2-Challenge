@@ -99,13 +99,15 @@ function cumleKur(
 
 /* (Oto test yok) cumleKur fonksiyonuna yalnızca 1 parametre göndererek "Hello World!" stringini elde edin, 
 sonucu konsolde gözlemleyin */
-
+console.log(cumleKur("Hello World!"));
 /* (Oto test yok) cumleKur fonksiyonuna yalnızca 2 parametre göndererek "Hello World!" stringini elde edin, 
 sonucu konsolde gözlemleyin */
+console.log(cumleKur("Hello" , "World!"));
 
 /* (Oto test var) cumleKur fonksiyonuna 5 parametre göndererek "Ben iyi bir yazılımcı olacağım!" stringini 
 elde edin, sonucu `bircumle` değişkenine atayın ve konsolde gözlemleyin */
 var bircumle;
+bircumle=cumleKur("Ben", "iyi", "bir", "yazılımcı", "olacağım!");
 
 /* kodlar buraya */
 
@@ -128,9 +130,25 @@ var bircumle;
 			5. Oluşturulan yeni dizi döndürülecek.
 	*/
 
-function cumlelereDonustur(/* kodlar buraya */) {
-  /* kodlar buraya */
+function cumlelereDonustur(cumleler,ayrac) 
+{
+  ayrac=ayrac || ",";
+  let birlesikCumleler=[];
+  /*
+  for (let i = 0; i < cumleler.length; index++) {
+    let x=cumleler[i].join(" ");
+    birlesikCumleler.push(x);
+
+    
+  }
+  */
+return cumleler.map((oSiradaIsledigimEleman,dizidekiSirasi)=>oSiradaIsledigimEleman.join(ayrac));
+  return birlesikCumleler;
 }
+
+var sonuclar=cumlelereDonustur(cumleler);
+console.log(sonuclar);
+console.log(cumlelereDonustur(cumleler," "));
 
 /* GÖREV 2:
 		paragrafOlustur fonksiyonuna aşağıdakileri uygulayın.
@@ -145,16 +163,29 @@ function cumlelereDonustur(/* kodlar buraya */) {
 			6. Oluşturulan paragraf döndürülecek
 	*/
 
-function paragrafOlustur(/* kodlar buraya */) {
-  /* kodlar buraya */
+function paragrafOlustur(dizi,cbCumlekur,cbCumlelereDonustur) {
+  let cumleArray = cbCumlelereDonustur(dizi," ");
+  console.log(cumleArray);
+  const tekCumleler=cumleArray.filter((eleman,index)=>{return [1,3,5,7,9].includes(index)});
+
+
+  const paragrraf=tekCumleler.reduce((acc,sentence)=>cbCumlekur(acc,sentence),"");
+  return paragrraf;
+
 }
+console.log(paragrafOlustur(cumleler,cumleKur,cumlelereDonustur));
 
 /* 	GÖREV 3:
 		Yukarıda isimleri sebzeler ve meyveler olan 2 dizi bulunmaktadır. Bu dizileri kullanarak aşağıdaki görevleri tamamlayın.
 			3a. meyveler dizisinin ilk ve son elemanlarını diziden çıkartın. (.pop ve .shift metodlarını kullanın)
  */
 //3a çözümü
-/* kodlar buraya */
+console.log("meyveler t0",meyveler);
+meyveler.pop();
+console.log("meyveler t1",meyveler);
+meyveler.shift();
+console.log("meyveler t2",meyveler);
+
 
 /* 			3b.  Bir tavşan ve bir kirpi arkadaşlar sebzeler dizimizin peşine düştü. Tavşan => 🐇 , Kirpi=> 🦔 , 
 Tavşanla kirpi sebzeleri ele geçirmek için bir plan kurdular. Tavşan diziye önden saldıracak, kirpi ise 
@@ -162,16 +193,24 @@ arkalarından dolaşacak. Varsayalım ki arkadaşların planları başarılı ol
 Kirpiyi dizinin son elemanına ekleyin 🦔
  */
 //3b çözümü
-/* kodlar buraya */
+console.log("sebzeler t0",sebzeler);
+meyveler.unshift("🐇");
+console.log("sebzeler t1",sebzeler);
+sebzeler.push("🦔");
+console.log("sebzeler t2",sebzeler);
+
+
 
 /* 			3c. manav isminde bir dizi oluşturun.`meyveler` dizisi ilk elemanlara, `sebzeler` dizisi son 
 elemanlara denk gelecek şekilde, iki diziyi birleştirip sonucu manav dizisine aktarın. (.concat metodu)
  */
 //3c çözümü
-/* kodlar buraya */
+
 
 var manav;
+manav=meyveler.concat(sebzeler);
 
+//manav=[...meyveler,...sebzeler];
 /* 	GÖREV 4:
 		Yeni kurulmuş bir mesajlaşma startup firması atılan mesajları emojilerle zenginleştirmek istiyor. 
     Bunun için emojiler adında bir nesne tanımlamışlar. Kullanıcının gönderdiği mesaj stringi içinde 
@@ -189,9 +228,18 @@ var manav;
 			4. elde edilen string döndürülecek
  */
 
-function emojileriDonustur(/* kodlar buraya */) {
-  /* kodlar buraya */
+function emojileriDonustur(msj,emojilerKlavuzu) {
+  for(let shrt in emojilerKlavuzu)
+  {
+    msj=msj.replaceAll(shrt,emojilerKlavuzu[shrt]);
+    msj=msj.replaceAll(shrt.toUpperCase(),emojilerKlavuzu[shrt]);
+  }
+
+  console.log(msj,msj);
+
 }
+
+console.log(emojileriDonustur("Merhaba :) :p :P :o :O",emojiler));
 
 /*  Bu satırın aşağısındaki kodları lütfen değiştirmeyin  */
 function sa() {
